@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6ano28p1ryrv"]
+[gd_scene load_steps=6 format=3 uid="uid://c6ano28p1ryrv"]
 
 [ext_resource type="Texture2D" uid="uid://necry5riyqmo" path="res://Sprites/Character.png" id="1_1lcv0"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_36aec"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0n3a"]
-size = Vector2(62, 17)
+size = Vector2(64, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cors7"]
+size = Vector2(14, 60)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qk02b"]
+radius = 14.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_36aec")
@@ -13,9 +19,28 @@ script = ExtResource("1_36aec")
 rotation = 1.5708
 texture = ExtResource("1_1lcv0")
 
-[node name="CollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(-4, 1)
+[node name="BodyCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-4, 0)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_w0n3a")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="PlayerCamera" type="Camera2D" parent="."]
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="Body" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-4, 0)
+shape = SubResource("RectangleShape2D_cors7")
+debug_color = Color(0.980392, 0, 0.364706, 0.419608)
+
+[node name="Head" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_qk02b")
+debug_color = Color(0.982205, 0, 0.364278, 0.42)
+
+[node name="inv" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
