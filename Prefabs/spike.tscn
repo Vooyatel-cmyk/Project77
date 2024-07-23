@@ -11,18 +11,18 @@ size = Vector2(45.2548, 45.2548)
 [node name="Spike" type="Sprite2D"]
 texture = ExtResource("1_kl4j1")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Body" type="StaticBody2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="BodyCollision" type="CollisionShape2D" parent="Body"]
 position = Vector2(-4.76837e-07, 1.1921e-07)
 rotation = 0.785398
 shape = SubResource("RectangleShape2D_j2bw5")
 
-[node name="hitbox" type="Area2D" parent="."]
+[node name="HitBox" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 0
 
-[node name="Hitarea" type="CollisionShape2D" parent="hitbox"]
+[node name="HitboxCollision" type="CollisionShape2D" parent="HitBox"]
 rotation = 0.785398
 shape = SubResource("RectangleShape2D_7kawq")
 debug_color = Color(0.995084, 0, 0.211362, 0.42)
