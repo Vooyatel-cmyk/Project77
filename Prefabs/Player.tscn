@@ -3,16 +3,17 @@
 [ext_resource type="Texture2D" uid="uid://necry5riyqmo" path="res://Sprites/Character.png" id="1_1lcv0"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_36aec"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w0n3a"]
-size = Vector2(64, 17)
+[sub_resource type="CircleShape2D" id="CircleShape2D_63sev"]
+radius = 15.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cors7"]
 size = Vector2(14, 60)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qk02b"]
-radius = 14.0
+radius = 15.0
 
 [node name="Player" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_36aec")
 
 [node name="Sprite" type="Sprite2D" parent="."]
@@ -20,11 +21,14 @@ rotation = 1.5708
 texture = ExtResource("1_1lcv0")
 
 [node name="BodyCollision" type="CollisionShape2D" parent="."]
-position = Vector2(-4, 0)
 rotation = 1.5708
-shape = SubResource("RectangleShape2D_w0n3a")
+shape = SubResource("CircleShape2D_63sev")
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = -384
+limit_right = 2304
+limit_bottom = 1024
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_mask = 2

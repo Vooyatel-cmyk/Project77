@@ -12,7 +12,7 @@ func _move():
 func _sprint():
 	#Функция бега
 	if Input.is_action_pressed("sprint"):
-		Global.PlayerSpeed = 600
+		Global.PlayerSpeed = 400
 	else:
 		Global.PlayerSpeed = 300
 
