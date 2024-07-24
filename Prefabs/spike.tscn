@@ -2,21 +2,23 @@
 
 [ext_resource type="Texture2D" uid="uid://cn2wfpxy6stw6" path="res://Sprites/spike.png" id="1_kl4j1"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j2bw5"]
-size = Vector2(38.1838, 38.1838)
+[sub_resource type="CircleShape2D" id="CircleShape2D_arbo8"]
+radius = 19.2094
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7kawq"]
 size = Vector2(45.2548, 45.2548)
 
 [node name="Spike" type="Sprite2D"]
+texture_filter = 1
 texture = ExtResource("1_kl4j1")
 
 [node name="Body" type="StaticBody2D" parent="."]
+texture_filter = 1
 
 [node name="BodyCollision" type="CollisionShape2D" parent="Body"]
 position = Vector2(-4.76837e-07, 1.1921e-07)
 rotation = 0.785398
-shape = SubResource("RectangleShape2D_j2bw5")
+shape = SubResource("CircleShape2D_arbo8")
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 2

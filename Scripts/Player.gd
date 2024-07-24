@@ -1,34 +1,45 @@
 extends CharacterBody2D
 
 var Damage_Area = null
-var Interpol
+var PLayerSPEED = Global.PlayerSpeed
 
 func _move(_dt):
 	#Функция передвижения
 	var input_direction = Input.get_vector("left", "right", "up", "down")
-	velocity = input_direction * Global.PlayerSpeed
-	velocity = velocity.normalized() * Global.PlayerSpeed
+	velocity = input_direction * PLayerSPEED
+	velocity = velocity.normalized() * PLayerSPEED
 	
 	look_at(get_global_mouse_position())
 	
 func _sprint():
 	#Функция бега
-	if Input.is_action_pressed("sprint"):
-		Global.PlayerSpeed = 400
+	if Input.is_action_pressed("sprint") && Global.PlayerStamina > 0:
+		if $StaminaTimer.time_left == 0:
+			Global.PlayerStamina -= 1
+			$StaminaTimer.start()
+		PLayerSPEED = 400
 	else:
-		Global.PlayerSpeed = 300
+		PLayerSPEED = Global.PlayerSpeed
+		if Global.PlayerStamina < 100 && $StaminaRegenerationTimer.time_left == 0:
+			Global.PlayerStamina += 1
+			$StaminaRegenerationTimer.start()
 
 func _takedamage():
 	#Функция получения урона
-	if $inv.time_left == 0 && Damage_Area != null:
+	if $InvincibleTimer.time_left == 0 && Damage_Area != null:
 		Global.PlayerHP -= 10
-		$inv.start()
-		if Global.PlayerHP <= 0:
-			get_tree().reload_current_scene()
-			Global.PlayerHP = 100
+		$InvincibleTimer.start()
+
+func _death():
+	#Смерть
+	if Global.PlayerHP <= 0:
+		get_tree().reload_current_scene()
+		Global.PlayerHP = 100
+		Global.PlayerStamina = 100
 
 func _control(_dt):
 	#Главная функция что бы не засорять _physics_process()
+	_death()
 	_sprint()
 	_move(_dt)
 	_takedamage()

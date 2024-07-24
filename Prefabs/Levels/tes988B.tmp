@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://blwk2uhupdsfg"]
+[gd_scene load_steps=8 format=3 uid="uid://blwk2uhupdsfg"]
 
 [ext_resource type="Texture2D" uid="uid://bpcwpethnkrrl" path="res://Sprites/tile.png" id="1_bpitu"]
 [ext_resource type="PackedScene" uid="uid://cllnc22k3pbt7" path="res://Prefabs/hud.tscn" id="1_f5uky"]
 [ext_resource type="PackedScene" uid="uid://c6ano28p1ryrv" path="res://Prefabs/Player.tscn" id="1_rpev2"]
 [ext_resource type="Texture2D" uid="uid://cxre38mo5xyci" path="res://Sprites/grass.png" id="1_tddlu"]
 [ext_resource type="PackedScene" uid="uid://fa46qjxw3w3u" path="res://Prefabs/spike.tscn" id="2_ev8mo"]
-[ext_resource type="PackedScene" uid="uid://btx3nhiahbdh6" path="res://Prefabs/Zombie.tscn" id="4_6oa34"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ucryx"]
 texture = ExtResource("1_bpitu")
@@ -23,6 +22,7 @@ sources/1 = SubResource("TileSetAtlasSource_ucryx")
 [node name="TestLevel1" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 texture_repeat = 2
 texture = ExtResource("1_tddlu")
 centered = false
@@ -40,15 +40,6 @@ position = Vector2(736, 352)
 
 [node name="Spike3" parent="." instance=ExtResource("2_ev8mo")]
 position = Vector2(672, 416)
-
-[node name="Spike4" parent="." instance=ExtResource("2_ev8mo")]
-position = Vector2(672, 288)
-
-[node name="Spike5" parent="." instance=ExtResource("2_ev8mo")]
-position = Vector2(672, 352)
-
-[node name="Zombie" parent="." instance=ExtResource("4_6oa34")]
-position = Vector2(936, 176)
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(0, 384)

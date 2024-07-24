@@ -1,11 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwfepsklgteej"]
+[gd_scene load_steps=4 format=3 uid="uid://dwfepsklgteej"]
 
+[ext_resource type="Texture2D" uid="uid://elchpmuafwfe" path="res://Sprites/wall.png" id="1_rowyt"]
 [ext_resource type="PackedScene" uid="uid://c551afbt1fnbe" path="res://Prefabs/Menu/main_menu.tscn" id="1_yb467"]
 [ext_resource type="PackedScene" uid="uid://do8q2ljqibyqi" path="res://Prefabs/Menu/select_level.tscn" id="2_7wjnm"]
 
 [node name="main" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("1_rowyt")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1280, 720)
 
 [node name="SelectLevel" parent="." instance=ExtResource("2_7wjnm")]
 visible = false
