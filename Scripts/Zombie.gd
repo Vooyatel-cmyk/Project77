@@ -8,11 +8,10 @@ var state = IDLE
 const RunSpeed = 150
 const IdleSpeed = 100
 
-var Axis = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN]
 
-func _Zombie_AI():
+func _Zombie_AI(_dt):
 	if state == IDLE && $Timer.time_left == 0:
-		velocity = Axis.pick_random() * IdleSpeed
+		velocity = transform.x * IdleSpeed
 		$Timer.start()
 	elif state == HUNT:
 		$Timer.stop()
@@ -21,7 +20,7 @@ func _Zombie_AI():
 		look_at(Player.global_position)
 
 func _physics_process(delta):
-	_Zombie_AI()
+	_Zombie_AI(delta)
 	move_and_slide()
 
 func _on_detect_zone_body_entered(body):

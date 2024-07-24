@@ -40,10 +40,11 @@ wait_time = 0.25
 one_shot = true
 
 [node name="StaminaTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.05
 one_shot = true
 
 [node name="StaminaRegenerationTimer" type="Timer" parent="."]
+wait_time = 0.5
 one_shot = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

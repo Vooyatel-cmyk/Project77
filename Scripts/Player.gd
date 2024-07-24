@@ -20,7 +20,7 @@ func _sprint():
 		PLayerSPEED = 400
 	else:
 		PLayerSPEED = Global.PlayerSpeed
-		if Global.PlayerStamina < 100 && $StaminaRegenerationTimer.time_left == 0:
+		if Global.PlayerStamina < 50 && $StaminaRegenerationTimer.time_left == 0:
 			Global.PlayerStamina += 1
 			$StaminaRegenerationTimer.start()
 
@@ -35,7 +35,7 @@ func _death():
 	if Global.PlayerHP <= 0:
 		get_tree().reload_current_scene()
 		Global.PlayerHP = 100
-		Global.PlayerStamina = 100
+		Global.PlayerStamina = 50
 
 func _control(_dt):
 	#Главная функция что бы не засорять _physics_process()
@@ -43,6 +43,7 @@ func _control(_dt):
 	_sprint()
 	_move(_dt)
 	_takedamage()
+	Global._EXIT_GAME()
 
 func _physics_process(_delta) -> void:
 	_control(_delta)

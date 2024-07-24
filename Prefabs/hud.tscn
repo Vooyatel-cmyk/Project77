@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cllnc22k3pbt7"]
+[gd_scene load_steps=7 format=3 uid="uid://cllnc22k3pbt7"]
 
 [ext_resource type="Script" path="res://Scripts/hud.gd" id="1_dufio"]
+[ext_resource type="Texture2D" uid="uid://i2iisdinr2sp" path="res://Sprites/BAR.png" id="2_7ppta"]
 [ext_resource type="Texture2D" uid="uid://bb5cpxiovkl3" path="res://Sprites/HP.png" id="2_fvwto"]
 [ext_resource type="Texture2D" uid="uid://t3osws4361is" path="res://Sprites/stamina.png" id="3_s2dpr"]
 
@@ -25,6 +26,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer"]
+texture_filter = 1
+position = Vector2(1871, 26.5)
+scale = Vector2(0.750001, 0.828125)
+texture = ExtResource("2_7ppta")
 
 [node name="MainMenu" type="Button" parent="MarginContainer"]
 layout_mode = 2
