@@ -1,12 +1,14 @@
 extends CharacterBody2D
 
 var Damage_Area = null
+var Interpol
 
-func _move():
+func _move(_dt):
 	#Функция передвижения
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * Global.PlayerSpeed
 	velocity = velocity.normalized() * Global.PlayerSpeed
+	
 	look_at(get_global_mouse_position())
 	
 func _sprint():
@@ -25,16 +27,14 @@ func _takedamage():
 			get_tree().reload_current_scene()
 			Global.PlayerHP = 100
 
-func _control():
+func _control(_dt):
 	#Главная функция что бы не засорять _physics_process()
 	_sprint()
-	_move()
+	_move(_dt)
 	_takedamage()
 
-
-
 func _physics_process(_delta) -> void:
-	_control()
+	_control(_delta)
 	move_and_slide()
 
 #Сигналы Area2D
