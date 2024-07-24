@@ -26,7 +26,7 @@ shape = SubResource("CircleShape2D_63sev")
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 limit_left = 0
-limit_top = -384
+limit_top = 0
 limit_right = 2304
 limit_bottom = 1024
 
