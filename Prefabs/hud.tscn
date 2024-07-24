@@ -29,8 +29,8 @@ grow_vertical = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="MarginContainer"]
 texture_filter = 1
-position = Vector2(1871, 26.5)
-scale = Vector2(0.750001, 0.828125)
+position = Vector2(1232.5, 27)
+scale = Vector2(0.804688, 0.828125)
 texture = ExtResource("2_7ppta")
 
 [node name="MainMenu" type="Button" parent="MarginContainer"]

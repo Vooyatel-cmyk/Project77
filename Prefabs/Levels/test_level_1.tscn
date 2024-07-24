@@ -30,7 +30,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 2304, 1090)
 
 [node name="Player" parent="." instance=ExtResource("1_rpev2")]
-position = Vector2(384, 320)
+position = Vector2(456, 392)
 
 [node name="Spike" parent="." instance=ExtResource("2_ev8mo")]
 position = Vector2(608, 352)
