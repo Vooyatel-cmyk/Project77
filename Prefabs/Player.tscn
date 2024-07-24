@@ -1,13 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6ano28p1ryrv"]
+[gd_scene load_steps=5 format=3 uid="uid://c6ano28p1ryrv"]
 
 [ext_resource type="Texture2D" uid="uid://necry5riyqmo" path="res://Sprites/Character.png" id="1_1lcv0"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_36aec"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_63sev"]
 radius = 15.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cors7"]
-size = Vector2(14, 60)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qk02b"]
 radius = 15.0
@@ -32,11 +29,6 @@ limit_bottom = 1024
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_mask = 2
-
-[node name="Body" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(-4, 0)
-shape = SubResource("RectangleShape2D_cors7")
-debug_color = Color(0.980392, 0, 0.364706, 0.419608)
 
 [node name="Head" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_qk02b")

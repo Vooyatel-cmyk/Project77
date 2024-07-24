@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://bpcwpethnkrrl" path="res://Sprites/tile.png" id="1_bpitu"]
 [ext_resource type="PackedScene" uid="uid://cllnc22k3pbt7" path="res://Prefabs/hud.tscn" id="1_f5uky"]
 [ext_resource type="PackedScene" uid="uid://c6ano28p1ryrv" path="res://Prefabs/Player.tscn" id="1_rpev2"]
+[ext_resource type="Texture2D" uid="uid://cxre38mo5xyci" path="res://Sprites/grass.png" id="1_tddlu"]
 [ext_resource type="PackedScene" uid="uid://fa46qjxw3w3u" path="res://Prefabs/spike.tscn" id="2_ev8mo"]
-[ext_resource type="Texture2D" uid="uid://elchpmuafwfe" path="res://Sprites/wall.png" id="2_qhpgd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ucryx"]
 texture = ExtResource("1_bpitu")
@@ -24,7 +24,7 @@ sources/1 = SubResource("TileSetAtlasSource_ucryx")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_qhpgd")
+texture = ExtResource("1_tddlu")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 2304, 1024)
