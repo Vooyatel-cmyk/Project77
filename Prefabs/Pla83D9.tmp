@@ -1,21 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6ano28p1ryrv"]
+[gd_scene load_steps=6 format=3 uid="uid://c6ano28p1ryrv"]
 
+[ext_resource type="Texture2D" uid="uid://necry5riyqmo" path="res://Sprites/Character.png" id="1_1lcv0"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_36aec"]
-[ext_resource type="Texture2D" uid="uid://c2xjh5e5rkrd1" path="res://Sprites/char.png" id="2_jse5d"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_63sev"]
 radius = 15.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cors7"]
+size = Vector2(14, 60)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_qk02b"]
 radius = 15.0
 
-[node name="Player" type="CharacterBody2D" groups=["Players"]]
+[node name="Player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_36aec")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture_filter = 1
-texture = ExtResource("2_jse5d")
+rotation = 1.5708
+texture = ExtResource("1_1lcv0")
 
 [node name="BodyCollision" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -23,32 +26,24 @@ shape = SubResource("CircleShape2D_63sev")
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 limit_left = 0
-limit_top = 0
+limit_top = -384
 limit_right = 2304
 limit_bottom = 1024
-limit_smoothed = true
-position_smoothing_enabled = true
-rotation_smoothing_enabled = true
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_mask = 2
+
+[node name="Body" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-4, 0)
+shape = SubResource("RectangleShape2D_cors7")
+debug_color = Color(0.980392, 0, 0.364706, 0.419608)
 
 [node name="Head" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_qk02b")
 debug_color = Color(0.982205, 0, 0.364278, 0.42)
 
-[node name="InvincibleTimer" type="Timer" parent="."]
+[node name="inv" type="Timer" parent="."]
 wait_time = 0.25
-one_shot = true
-
-[node name="StaminaTimer" type="Timer" parent="."]
-wait_time = 0.05
-one_shot = true
-
-[node name="StaminaRegenerationTimer" type="Timer" parent="."]
-wait_time = 0.5
 one_shot = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

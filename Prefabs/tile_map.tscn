@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://cv4mj2fm27sao"]
+
+[ext_resource type="Texture2D" uid="uid://bpcwpethnkrrl" path="res://Sprites/tile.png" id="1_sg8w7"]
+[ext_resource type="Texture2D" uid="uid://elchpmuafwfe" path="res://Sprites/wall.png" id="2_lgp18"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t237g"]
+resource_name = "Tile"
+texture = ExtResource("1_sg8w7")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m12it"]
+resource_name = "wall"
+texture = ExtResource("2_lgp18")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSet" id="TileSet_iw2bq"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 15
+sources/0 = SubResource("TileSetAtlasSource_t237g")
+sources/1 = SubResource("TileSetAtlasSource_m12it")
+
+[node name="TileMap" type="TileMap"]
+tile_set = SubResource("TileSet_iw2bq")
+rendering_quadrant_size = 64
+format = 2

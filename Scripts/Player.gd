@@ -1,21 +1,57 @@
 extends CharacterBody2D
 
-func _move():
+var Damage_Area = null
+var PLayerSPEED = Global.PlayerSpeed
+
+func _move(_dt):
+	#Функция передвижения
 	var input_direction = Input.get_vector("left", "right", "up", "down")
-	velocity = input_direction * Global.PlayerSpeed
-	velocity = velocity.normalized() * Global.PlayerSpeed
+	velocity = input_direction * PLayerSPEED
+	velocity = velocity.normalized() * PLayerSPEED
+	
 	look_at(get_global_mouse_position())
 	
 func _sprint():
-	if Input.is_action_pressed("sprint"):
-		Global.PlayerSpeed = 600
+	#Функция бега
+	if Input.is_action_pressed("sprint") && Global.PlayerStamina > 0:
+		if $StaminaTimer.time_left == 0:
+			Global.PlayerStamina -= 1
+			$StaminaTimer.start()
+		PLayerSPEED = 400
 	else:
-		Global.PlayerSpeed = 300
+		PLayerSPEED = Global.PlayerSpeed
+		if Global.PlayerStamina < 50 && $StaminaRegenerationTimer.time_left == 0:
+			Global.PlayerStamina += 1
+			$StaminaRegenerationTimer.start()
 
-func _control():
+func _takedamage():
+	#Функция получения урона
+	if $InvincibleTimer.time_left == 0 && Damage_Area != null:
+		Global.PlayerHP -= 10
+		$InvincibleTimer.start()
+
+func _death():
+	#Смерть
+	if Global.PlayerHP <= 0:
+		get_tree().reload_current_scene()
+		Global.PlayerHP = 100
+		Global.PlayerStamina = 50
+
+func _control(_dt):
+	#Главная функция что бы не засорять _physics_process()
+	_death()
 	_sprint()
-	_move()
+	_move(_dt)
+	_takedamage()
+	Global._EXIT_GAME()
 
 func _physics_process(_delta) -> void:
-	_control()
+	_control(_delta)
 	move_and_slide()
+
+#Сигналы Area2D
+func _on_hitbox_area_entered(area):
+	Damage_Area = area
+func _on_hitbox_area_exited(area):
+	if area == Damage_Area:
+		Damage_Area = null

@@ -1,12 +1,13 @@
 extends CanvasLayer
 
-@onready var HP = $MarginContainer/HP
-
-func _ready():
-	pass
-	
 func _displaydata():
-	HP.text ="HP: " + str(Global.PlayerHP)
+	#Выводит инфу в худ
+	$MarginContainer/VBoxContainer/HP.text ="HP: " + str(Global.PlayerHP) + "  "
+	$MarginContainer/VBoxContainer/Stamina.text ="ST: " + str(Global.PlayerStamina) + "  "
 
 func _process(_delta):
 	_displaydata()
+
+
+func _on_main_menu_pressed():
+	get_tree().change_scene_to_file("res://main.tscn")
