@@ -19,6 +19,7 @@ script = ExtResource("2_7km4a")
 
 [node name="DetectZone" type="Area2D" parent="." index="0"]
 collision_layer = 0
+collision_mask = 3
 
 [node name="DetectCollision" type="CollisionShape2D" parent="DetectZone" index="0"]
 shape = SubResource("CircleShape2D_kase8")
@@ -35,6 +36,9 @@ shape = SubResource("CircleShape2D_lcy1y")
 position = Vector2(10, 0)
 shape = SubResource("CapsuleShape2D_662yn")
 debug_color = Color(0.976788, 0, 0.409164, 0.42)
+
+[node name="Timer" type="Timer" parent="." index="6"]
+one_shot = true
 
 [connection signal="body_entered" from="DetectZone" to="." method="_on_detect_zone_body_entered"]
 [connection signal="body_exited" from="DetectZone" to="." method="_on_detect_zone_body_exited"]

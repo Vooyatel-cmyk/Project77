@@ -11,7 +11,7 @@ func _ready():
 	movementSpeed = 50
 	runSpeed = 150
 
-func _move():
+func _move(dt = null):
 	if state == IDLE && $Timer.time_left == 0:
 		velocity = transform.x * movementSpeed
 		$Timer.start()
@@ -22,9 +22,10 @@ func _move():
 		look_at(Player.global_position)
 
 func _logic():
+	print(hp)
 	_takeDamage(10)
 	_move()
-	_death()
+	_death(hp)
 
 func _physics_process(_delta):
 	_logic()
