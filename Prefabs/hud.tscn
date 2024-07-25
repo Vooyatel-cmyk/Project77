@@ -27,17 +27,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="MainMenu" type="Button" parent="MarginContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Main Menu"
+
+[node name="Restart" type="Button" parent="MarginContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Restart"
+
 [node name="Sprite2D" type="Sprite2D" parent="MarginContainer"]
 texture_filter = 1
 position = Vector2(1232.5, 27)
 scale = Vector2(0.804688, 0.828125)
 texture = ExtResource("2_7ppta")
-
-[node name="MainMenu" type="Button" parent="MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "Main Menu"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -70,4 +80,5 @@ position = Vector2(-14, 12)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_s2dpr")
 
-[connection signal="pressed" from="MarginContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer2/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer2/Restart" to="." method="_on_restart_pressed"]

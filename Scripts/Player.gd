@@ -28,14 +28,13 @@ func _takedamage():
 	#Функция получения урона
 	if $InvincibleTimer.time_left == 0 && Damage_Area != null:
 		Global.PlayerHP -= 10
+		$AnimationPlayer.play("damage")
 		$InvincibleTimer.start()
 
 func _death():
 	#Смерть
 	if Global.PlayerHP <= 0:
-		get_tree().reload_current_scene()
-		Global.PlayerHP = 100
-		Global.PlayerStamina = 50
+		queue_free()
 
 func _control(_dt):
 	#Главная функция что бы не засорять _physics_process()

@@ -11,3 +11,9 @@ func _process(_delta):
 
 func _on_main_menu_pressed():
 	get_tree().change_scene_to_file("res://main.tscn")
+
+
+func _on_restart_pressed():
+	get_tree().reload_current_scene()
+	Global.PlayerHP = 100
+	Global.PlayerStamina = 50

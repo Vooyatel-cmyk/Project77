@@ -1,7 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6ano28p1ryrv"]
+[gd_scene load_steps=11 format=3 uid="uid://c6ano28p1ryrv"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_36aec"]
+[ext_resource type="Shader" path="res://Shaders/Player.gdshader" id="1_lj1m2"]
 [ext_resource type="Texture2D" uid="uid://c2xjh5e5rkrd1" path="res://Sprites/char.png" id="2_jse5d"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_acbhk"]
+shader = ExtResource("1_lj1m2")
+shader_parameter/hit_opacity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2nen6"]
+shader = ExtResource("1_lj1m2")
+shader_parameter/hit_opacity = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_63sev"]
 radius = 15.0
@@ -9,12 +18,51 @@ radius = 15.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_qk02b"]
 radius = 15.0
 
+[sub_resource type="Animation" id="Animation_lylm3"]
+resource_name = "damage"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:material:shader_parameter/hit_opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.5, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_x1pn7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:material:shader_parameter/hit_opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_75nc7"]
+_data = {
+"RESET": SubResource("Animation_x1pn7"),
+"damage": SubResource("Animation_lylm3")
+}
+
 [node name="Player" type="CharacterBody2D" groups=["Players"]]
+material = SubResource("ShaderMaterial_acbhk")
 motion_mode = 1
 script = ExtResource("1_36aec")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_2nen6")
 texture = ExtResource("2_jse5d")
 
 [node name="BodyCollision" type="CollisionShape2D" parent="."]
@@ -50,6 +98,11 @@ one_shot = true
 [node name="StaminaRegenerationTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_75nc7")
+}
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
