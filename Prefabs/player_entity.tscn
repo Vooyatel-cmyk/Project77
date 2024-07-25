@@ -15,6 +15,21 @@ radius = 16.0312
 [sub_resource type="CircleShape2D" id="CircleShape2D_7b1af"]
 radius = 14.0
 
+[sub_resource type="Animation" id="Animation_nvfvk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:material:shader_parameter/hit_opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_s6nyn"]
 resource_name = "damage"
 length = 0.25
@@ -31,21 +46,6 @@ tracks/0/keys = {
 "values": [0.0, 1.0, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_nvfvk"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:material:shader_parameter/hit_opacity")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mgxnj"]
 _data = {
 "RESET": SubResource("Animation_nvfvk"),
@@ -53,6 +53,7 @@ _data = {
 }
 
 [node name="Player" groups=["Players"] instance=ExtResource("1_t4gr8")]
+position = Vector2(603, 352)
 script = ExtResource("2_vmqf6")
 
 [node name="Sprite2D2" type="Sprite2D" parent="." index="0"]
@@ -73,6 +74,15 @@ collision_layer = 1
 shape = SubResource("CircleShape2D_7b1af")
 
 [node name="Camera2D" type="Camera2D" parent="." index="5"]
+limit_left = 0
+limit_top = 0
+limit_right = 2304
+limit_bottom = 1088
+limit_smoothed = true
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
 
 [node name="StaminaTimer" type="Timer" parent="." index="6"]
 wait_time = 0.05
