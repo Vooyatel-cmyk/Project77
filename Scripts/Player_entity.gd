@@ -3,6 +3,7 @@ extends "res://Scripts/Entity.gd"
 func _ready():
 	movementSpeed = Global.PlayerSpeed
 	runSpeed = 400
+	$AnimationPlayer.play("RESET")
 	
 func _move(_dt = null):
 	#Функция передвижения
@@ -27,8 +28,8 @@ func _sprint():
 func _takeDamage(damage = 1):
 	#Функция получения урона
 	if $InvincibleTimer.time_left == 0 && Damage_Area != null:
+		$AnimationPlayer.play("damage")
 		Global.PlayerHP -= damage
-		$AnimationPlayer.play("take_damage")
 		$InvincibleTimer.start()
 
 func _control(_dt):

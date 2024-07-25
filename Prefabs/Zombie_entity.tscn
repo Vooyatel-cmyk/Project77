@@ -1,18 +1,63 @@
-[gd_scene load_steps=7 format=3 uid="uid://cmq06aa44ssp2"]
+[gd_scene load_steps=13 format=3 uid="uid://cmq06aa44ssp2"]
 
 [ext_resource type="PackedScene" uid="uid://fcy7la2ewqek" path="res://Prefabs/entity.tscn" id="1_lkf37"]
 [ext_resource type="Script" path="res://Scripts/Zombie_entity.gd" id="2_7km4a"]
 [ext_resource type="Texture2D" uid="uid://bpv4epdjeaied" path="res://Sprites/Zombie.png" id="2_lhs1w"]
+[ext_resource type="Shader" path="res://Shaders/Player.gdshader" id="3_e7i2h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kase8"]
 radius = 344.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l1qqi"]
+shader = ExtResource("3_e7i2h")
+shader_parameter/hit_opacity = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lcy1y"]
 radius = 15.0333
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_662yn"]
-radius = 25.0
-height = 60.0
+radius = 15.0
+height = 56.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_78gdr"]
+size = Vector2(34, 11)
+
+[sub_resource type="Animation" id="Animation_waspb"]
+resource_name = "damage"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:material:shader_parameter/hit_opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_x5le2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:material:shader_parameter/hit_opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1botp"]
+_data = {
+"RESET": SubResource("Animation_x5le2"),
+"damage": SubResource("Animation_waspb")
+}
 
 [node name="Zombie" instance=ExtResource("1_lkf37")]
 script = ExtResource("2_7km4a")
@@ -27,18 +72,35 @@ debug_color = Color(0.592171, 0.54691, 1.15514e-06, 0.42)
 
 [node name="Sprite2D" parent="." index="1"]
 texture_filter = 1
+
+[node name="Sprite2D2" type="Sprite2D" parent="." index="2"]
+material = SubResource("ShaderMaterial_l1qqi")
 texture = ExtResource("2_lhs1w")
 
-[node name="BodyCollision" parent="." index="2"]
+[node name="BodyCollision" parent="." index="3"]
 shape = SubResource("CircleShape2D_lcy1y")
 
 [node name="HitBoxCollision" parent="HitBox" index="0"]
-position = Vector2(10, 0)
 shape = SubResource("CapsuleShape2D_662yn")
 debug_color = Color(0.976788, 0, 0.409164, 0.42)
 
+[node name="HitBoxCollisionArms" type="CollisionShape2D" parent="HitBox" index="1"]
+position = Vector2(15, 23)
+shape = SubResource("RectangleShape2D_78gdr")
+debug_color = Color(0.995657, 0, 0.201349, 0.42)
+
+[node name="HitBoxCollisionArms2" type="CollisionShape2D" parent="HitBox" index="2"]
+position = Vector2(14, -23)
+shape = SubResource("RectangleShape2D_78gdr")
+debug_color = Color(0.995657, 0, 0.201349, 0.42)
+
 [node name="Timer" type="Timer" parent="." index="6"]
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+libraries = {
+"": SubResource("AnimationLibrary_1botp")
+}
 
 [connection signal="body_entered" from="DetectZone" to="." method="_on_detect_zone_body_entered"]
 [connection signal="body_exited" from="DetectZone" to="." method="_on_detect_zone_body_exited"]
