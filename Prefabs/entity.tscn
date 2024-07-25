@@ -1,50 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://fcy7la2ewqek"]
+[gd_scene load_steps=5 format=3 uid="uid://fcy7la2ewqek"]
 
 [ext_resource type="Script" path="res://Scripts/Entity.gd" id="1_ts87v"]
 [ext_resource type="Shader" path="res://Shaders/Player.gdshader" id="2_noqs1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sahqi"]
+shader = ExtResource("2_noqs1")
+shader_parameter/hit_opacity = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v0ok3"]
 shader = ExtResource("2_noqs1")
 shader_parameter/hit_opacity = 0.0
 
-[sub_resource type="Animation" id="Animation_kjl6c"]
-resource_name = "take_damage"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:material:shader_parameter/hit_opacity")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 0.5, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_bbtoy"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:material:shader_parameter/hit_opacity")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gya1s"]
-_data = {
-"RESET": SubResource("Animation_bbtoy"),
-"take_damage": SubResource("Animation_kjl6c")
-}
-
 [node name="Entity" type="CharacterBody2D"]
+material = SubResource("ShaderMaterial_sahqi")
 script = ExtResource("1_ts87v")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -57,17 +25,10 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="HitBoxCollision" type="CollisionShape2D" parent="HitBox"]
-
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
+debug_color = Color(0.98422, 0, 0.34566, 0.42)
 
 [node name="InvincibleTimer" type="Timer" parent="."]
 one_shot = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_gya1s")
-}
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="area_exited" from="HitBox" to="." method="_on_hit_box_area_exited"]

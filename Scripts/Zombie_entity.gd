@@ -10,8 +10,15 @@ enum{
 func _ready():
 	movementSpeed = 50
 	runSpeed = 150
+	$AnimationPlayer.play("RESET")
 
-func _move():
+func _takeDamage(damage = 1):
+	if $InvincibleTimer.time_left == 0 && Damage_Area != null:
+		$AnimationPlayer.play("damage")
+		hp -= damage
+		$InvincibleTimer.start()
+
+func _move(dt = null):
 	if state == IDLE && $Timer.time_left == 0:
 		velocity = transform.x * movementSpeed
 		$Timer.start()
@@ -22,9 +29,10 @@ func _move():
 		look_at(Player.global_position)
 
 func _logic():
+	print(hp)
 	_takeDamage(10)
 	_move()
-	_death()
+	_death(hp)
 
 func _physics_process(_delta):
 	_logic()

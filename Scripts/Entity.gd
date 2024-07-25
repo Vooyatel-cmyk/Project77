@@ -10,18 +10,12 @@ const INVINCIBLE = false
 
 #Функции
 
-func _death():
+func _death(hp = 100):
 	#Функция смерти
 	if hp <= 0 && !INVINCIBLE:
 		queue_free()
 
-func _takeDamage(damage = 1):
-	if $InvincibleTimer.time_left == 0 && Damage_Area != null:
-		hp -= damage
-		$AnimationPlayer.play("take_damage")
-		$InvincibleTimer.start()
-
-func _move():
+func _move(_dt = null):
 	pass
 	
 func _attack():

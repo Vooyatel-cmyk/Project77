@@ -30,7 +30,6 @@ region_enabled = true
 region_rect = Rect2(0, 0, 2304, 1090)
 
 [node name="Player" parent="." instance=ExtResource("2_s45fm")]
-position = Vector2(1408, 608)
 
 [node name="Spike" parent="." instance=ExtResource("2_ev8mo")]
 position = Vector2(608, 352)
@@ -48,7 +47,7 @@ position = Vector2(672, 288)
 position = Vector2(672, 352)
 
 [node name="Zombie" parent="." instance=ExtResource("2_fa7mk")]
-position = Vector2(401, 183)
+position = Vector2(138, 126)
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(0, 384)
