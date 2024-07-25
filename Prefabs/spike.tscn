@@ -26,7 +26,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_xvxn2"]
 resource_name = "spikeRotation"
-length = 3.0
+length = 4.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -35,10 +35,10 @@ tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2, 3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 1.5708, 3.14159, 6.28319]
+"values": [0.0, 1.5708, 3.14159, 4.71239, 6.28319]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4wqjd"]
