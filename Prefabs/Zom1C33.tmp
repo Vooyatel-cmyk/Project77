@@ -6,7 +6,7 @@
 [ext_resource type="Shader" path="res://Shaders/Player.gdshader" id="3_e7i2h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kase8"]
-radius = 1463.09
+radius = 344.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l1qqi"]
 shader = ExtResource("3_e7i2h")
@@ -23,7 +23,7 @@ height = 56.0
 size = Vector2(34, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_50sax"]
-size = Vector2(6, 12)
+size = Vector2(5, 20)
 
 [sub_resource type="Animation" id="Animation_x5le2"]
 length = 0.001
@@ -63,7 +63,6 @@ _data = {
 }
 
 [node name="Zombie" instance=ExtResource("1_lkf37")]
-position = Vector2(-2, 4)
 script = ExtResource("2_7km4a")
 
 [node name="DetectZone" type="Area2D" parent="." index="0"]
@@ -96,7 +95,7 @@ shape = SubResource("RectangleShape2D_78gdr")
 debug_color = Color(0.995657, 0, 0.201349, 0.42)
 
 [node name="BiteCollision" type="CollisionShape2D" parent="HitBox" index="3"]
-position = Vector2(18, 0)
+position = Vector2(17.5, 0)
 shape = SubResource("RectangleShape2D_50sax")
 debug_color = Color(0.99843, 0, 0.142226, 0.42)
 

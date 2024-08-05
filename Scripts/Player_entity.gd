@@ -1,5 +1,9 @@
 extends "res://Scripts/Entity.gd"
 
+const SWORD = preload("res://Prefabs/sword_attack.tscn")
+
+
+
 func _ready():
 	movementSpeed = Global.PlayerSpeed
 	runSpeed = 400
@@ -25,20 +29,30 @@ func _sprint():
 			Global.PlayerStamina += 1
 			$StaminaRegenerationTimer.start()
 
-func _takeDamage(damage = 1):
+func _takeDamage(_damage = 1, _hp = 100):
 	#Функция получения урона
-	if $InvincibleTimer.time_left == 0 && Damage_Area != null:
+	if $InvincibleTimer.time_left == 0 && Damage_Area != null && !Damage_Area.is_in_group("player"):
 		$AnimationPlayer.play("damage")
-		Global.PlayerHP -= damage
+		_hp -= _damage
 		$InvincibleTimer.start()
+		return _hp
+	else:
+		return _hp
 
 func _control(_dt):
 	#Главная функция что бы не засорять _physics_process()
 	_death(Global.PlayerHP)
 	_sprint()
 	_move(_dt)
-	_takeDamage(10)
+	Global.PlayerHP = _takeDamage(10, Global.PlayerHP)
+	_attack()
 	Global._EXIT_GAME()
+
+func _attack(_dt = null):
+	if Input.is_action_just_pressed("attack"):
+		var sword = SWORD.instantiate()
+		sword.position = $attack_pos.global_position
+		get_parent().add_child(sword)
 
 func _physics_process(delta):
 	_control(delta)
@@ -46,3 +60,7 @@ func _physics_process(delta):
 
 func _on_hit_box_area_entered(area):
 	Damage_Area = area
+
+
+
+	

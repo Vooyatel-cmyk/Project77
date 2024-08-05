@@ -15,10 +15,10 @@ shader_parameter/hit_opacity = 0.0
 material = SubResource("ShaderMaterial_sahqi")
 script = ExtResource("1_ts87v")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="EntitySprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_v0ok3")
 
-[node name="BodyCollision" type="CollisionShape2D" parent="."]
+[node name="EntityCollision" type="CollisionShape2D" parent="."]
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 2

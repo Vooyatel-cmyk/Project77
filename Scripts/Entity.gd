@@ -2,23 +2,23 @@ extends CharacterBody2D
 
 #Переменные
 
-var hp = 100
-var movementSpeed = 150
-var runSpeed = 300
+@export var movementSpeed = 150
+@export var runSpeed = 300
 var Damage_Area = null
-const INVINCIBLE = false
+@export var INVINCIBLE = false
 
 #Функции
 
-func _death(hp = 100):
+func _death(_hp = 100):
 	#Функция смерти
-	if hp <= 0 && !INVINCIBLE:
-		queue_free()
+	if _hp != null:
+		if _hp <= 0 && !INVINCIBLE:
+			queue_free()
 
 func _move(_dt = null):
 	pass
 	
-func _attack():
+func _attack(_dt):
 	pass
 	
 func _sprint():

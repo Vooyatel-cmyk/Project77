@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://wn06p64mqko5"]
+[gd_scene load_steps=12 format=3 uid="uid://wn06p64mqko5"]
 
 [ext_resource type="PackedScene" uid="uid://fcy7la2ewqek" path="res://Prefabs/entity.tscn" id="1_t4gr8"]
 [ext_resource type="Texture2D" uid="uid://c2xjh5e5rkrd1" path="res://Sprites/char.png" id="2_qyoq4"]
 [ext_resource type="Script" path="res://Scripts/Player_entity.gd" id="2_vmqf6"]
 [ext_resource type="Shader" path="res://Shaders/Player.gdshader" id="3_2rl2s"]
+[ext_resource type="PackedScene" uid="uid://cllnc22k3pbt7" path="res://Prefabs/hud.tscn" id="5_lypmc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_76ng1"]
 shader = ExtResource("3_2rl2s")
 shader_parameter/hit_opacity = 0.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_qur83"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_avjvx"]
 radius = 16.0312
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7b1af"]
@@ -20,7 +21,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:material:shader_parameter/hit_opacity")
+tracks/0/path = NodePath("PlayerSprite:material:shader_parameter/hit_opacity")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -36,7 +37,7 @@ length = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:material:shader_parameter/hit_opacity")
+tracks/0/path = NodePath("PlayerSprite:material:shader_parameter/hit_opacity")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -56,43 +57,44 @@ _data = {
 position = Vector2(603, 352)
 script = ExtResource("2_vmqf6")
 
-[node name="Sprite2D2" type="Sprite2D" parent="." index="0"]
+[node name="attack_pos" type="Marker2D" parent="." index="0"]
+
+[node name="PlayerSprite" type="Sprite2D" parent="." index="1"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_76ng1")
 texture = ExtResource("2_qyoq4")
 
-[node name="Sprite2D" parent="." index="1"]
-texture_filter = 1
+[node name="EntityCollision" parent="." index="3"]
+shape = SubResource("CircleShape2D_avjvx")
 
-[node name="BodyCollision" parent="." index="2"]
-shape = SubResource("CircleShape2D_qur83")
-
-[node name="HitBox" parent="." index="3"]
+[node name="HitBox" parent="." index="4"]
 collision_layer = 1
 
 [node name="HitBoxCollision" parent="HitBox" index="0"]
 shape = SubResource("CircleShape2D_7b1af")
 
-[node name="Camera2D" type="Camera2D" parent="." index="5"]
+[node name="Camera2D" type="Camera2D" parent="." index="6"]
 limit_left = 0
 limit_top = 0
 limit_right = 2304
 limit_bottom = 1088
-limit_smoothed = true
-position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
+drag_top_margin = 0.1
+drag_bottom_margin = 0.1
 
-[node name="StaminaTimer" type="Timer" parent="." index="6"]
+[node name="HUD" parent="Camera2D" index="0" instance=ExtResource("5_lypmc")]
+
+[node name="StaminaTimer" type="Timer" parent="." index="7"]
 wait_time = 0.05
 one_shot = true
 
-[node name="StaminaRegenerationTimer" type="Timer" parent="." index="7"]
+[node name="StaminaRegenerationTimer" type="Timer" parent="." index="8"]
 wait_time = 0.5
 one_shot = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
 libraries = {
 "": SubResource("AnimationLibrary_mgxnj")
 }
