@@ -6,7 +6,7 @@ func _ready():
 	pass # Replace with function body.
 
 
-func _process(delta):
+func _process(_delta):
 	pass
 func _zombie_spawn():
 		var zombie = ZOMBIE.instantiate()

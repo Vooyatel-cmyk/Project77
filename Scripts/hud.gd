@@ -4,6 +4,7 @@ func _displaydata():
 	#Выводит инфу в худ
 	$MarginContainer/VBoxContainer/HP.text ="HP: " + str(Global.PlayerHP) + "  "
 	$MarginContainer/VBoxContainer/Stamina.text ="ST: " + str(Global.PlayerStamina) + "  "
+	$MarginContainer/CenterContainer/Label.text ="score: " + str(Global.score)
 
 func _process(_delta):
 	_displaydata()
