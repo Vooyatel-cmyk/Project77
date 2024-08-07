@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cmq06aa44ssp2"]
+[gd_scene load_steps=15 format=3 uid="uid://cmq06aa44ssp2"]
 
 [ext_resource type="PackedScene" uid="uid://fcy7la2ewqek" path="res://Prefabs/entity.tscn" id="1_lkf37"]
 [ext_resource type="Script" path="res://Scripts/Zombie_entity.gd" id="2_7km4a"]
@@ -9,21 +9,9 @@
 radius = 1463.09
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l1qqi"]
+resource_local_to_scene = true
 shader = ExtResource("3_e7i2h")
 shader_parameter/hit_opacity = 0.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_qqqb2"]
-radius = 16.0312
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_662yn"]
-radius = 15.0
-height = 56.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_78gdr"]
-size = Vector2(21, 11)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_50sax"]
-size = Vector2(6, 12)
 
 [sub_resource type="Animation" id="Animation_x5le2"]
 length = 0.001
@@ -51,6 +39,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_waspb"]
 resource_name = "damage"
@@ -68,11 +68,53 @@ tracks/0/keys = {
 "values": [0.0, 1.0, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_1lwht"]
+resource_name = "new_animation"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ZombieSprite:material:shader_parameter/hit_opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.5, 0.5), Vector2(0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1botp"]
 _data = {
 "RESET": SubResource("Animation_x5le2"),
-"damage": SubResource("Animation_waspb")
+"damage": SubResource("Animation_waspb"),
+"death": SubResource("Animation_1lwht")
 }
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qqqb2"]
+radius = 16.0312
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_662yn"]
+radius = 15.0
+height = 56.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_78gdr"]
+size = Vector2(21, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_50sax"]
+size = Vector2(6, 12)
 
 [node name="Zombie" instance=ExtResource("1_lkf37")]
 position = Vector2(-2, 4)
@@ -89,6 +131,12 @@ debug_color = Color(0.592171, 0.54691, 1.15514e-06, 0.42)
 [node name="ZombieSprite" type="Sprite2D" parent="." index="2"]
 material = SubResource("ShaderMaterial_l1qqi")
 texture = ExtResource("2_lhs1w")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ZombieSprite" index="0"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_1botp")
+}
 
 [node name="EntityCollision" parent="." index="3"]
 shape = SubResource("CircleShape2D_qqqb2")
@@ -113,15 +161,11 @@ shape = SubResource("RectangleShape2D_50sax")
 debug_color = Color(0.99843, 0, 0.142226, 0.42)
 
 [node name="InvincibleTimer" parent="." index="5"]
-wait_time = 0.5
+wait_time = 0.25
 
 [node name="Timer" type="Timer" parent="." index="6"]
 one_shot = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
-libraries = {
-"": SubResource("AnimationLibrary_1botp")
-}
-
 [connection signal="body_entered" from="DetectZone" to="." method="_on_detect_zone_body_entered"]
 [connection signal="body_exited" from="DetectZone" to="." method="_on_detect_zone_body_exited"]
+[connection signal="animation_finished" from="ZombieSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -2,7 +2,7 @@ extends "res://Scripts/Entity.gd"
 
 const SWORD = preload("res://Prefabs/sword_attack.tscn")
 
-
+var movment = ["left", "right", "up", "down"]
 
 func _ready():
 	movementSpeed = Global.PlayerSpeed
@@ -18,7 +18,7 @@ func _move(_dt = null):
 
 func _sprint():
 	#Функция бега
-	if Input.is_action_pressed("sprint") && Global.PlayerStamina > 0:
+	if Input.is_action_pressed("sprint") && Global.PlayerStamina > 0 && (Input.is_action_pressed("left") || Input.is_action_pressed("right") || Input.is_action_pressed("up") || Input.is_action_pressed("down")):
 		if $StaminaTimer.time_left == 0:
 			Global.PlayerStamina -= 1
 			$StaminaTimer.start()
@@ -38,6 +38,13 @@ func _takeDamage(_damage = 1, _hp = 100):
 		return _hp
 	else:
 		return _hp
+		
+func _death(_hp = 100):
+	
+	if _hp != null: #Функция смерти
+		
+		if _hp <= 0 && !invincible:
+			get_tree().change_scene_to_file("res://main.tscn")
 
 func _control(_dt):
 	#Главная функция что бы не засорять _physics_process()
@@ -52,6 +59,7 @@ func _attack(_dt = null):
 	if Input.is_action_just_pressed("attack"):
 		var sword = SWORD.instantiate()
 		sword.position = $attack_pos.global_position
+		#sword.position = velocity
 		get_parent().add_child(sword)
 
 func _physics_process(delta):

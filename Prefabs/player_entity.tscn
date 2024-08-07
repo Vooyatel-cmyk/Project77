@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cllnc22k3pbt7" path="res://Prefabs/hud.tscn" id="5_lypmc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_76ng1"]
+resource_local_to_scene = true
 shader = ExtResource("3_2rl2s")
 shader_parameter/hit_opacity = 0.0
 
@@ -58,6 +59,7 @@ position = Vector2(603, 352)
 script = ExtResource("2_vmqf6")
 
 [node name="attack_pos" type="Marker2D" parent="." index="0"]
+position = Vector2(34, 0)
 
 [node name="PlayerSprite" type="Sprite2D" parent="." index="1"]
 texture_filter = 1
