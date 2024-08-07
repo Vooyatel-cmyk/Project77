@@ -69,6 +69,3 @@ func _physics_process(delta):
 func _on_hit_box_area_entered(area):
 	Damage_Area = area
 
-
-
-	

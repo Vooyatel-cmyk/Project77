@@ -57,7 +57,6 @@ func _death(_hp = 100):
 		if _hp <= 0 && !invincible && _hp != null:
 			alive = false
 			animator.play("death")
-			Global.score += 1
 
 func _logic():
 	if alive == true:
@@ -98,4 +97,5 @@ func _on_hit_box_area_entered(area):
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "death":
+		Global.score += 16
 		queue_free()

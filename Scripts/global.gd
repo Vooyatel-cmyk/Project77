@@ -12,6 +12,7 @@ var PlayerResistPhys = 10
 var PlayerResistMagic = 50
 
 var score = 0
+var sv = true
 
 func _EXIT_GAME():
 	if Input.is_action_just_pressed("exit"):

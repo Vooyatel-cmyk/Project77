@@ -16,5 +16,6 @@ func _on_main_menu_pressed():
 
 func _on_restart_pressed():
 	get_tree().reload_current_scene()
+	Global.score = 0
 	Global.PlayerHP = 100
 	Global.PlayerStamina = 50
